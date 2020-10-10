@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Shop</title>
+</head>
+<body>
+<p>
+    <a href="/shoppingCart">My Cart</a>
+</p>
+<p>
+    <form action="#" th:action="@{/searchProduct}" th:object="${search}" method="post">
+    <p><input type="text" placeholder="Search..."  th:field="*{searchByName}" />
+    <select th:field="*{sort}">
+        <option th:value="---">Sort by price</option>
+        <option th:value="asc">Ascending</option>
+        <option th:value="desc">Descending</option>
+    </select>
+    </p>
+    <p><input type="submit" value="Find" /></p>
+    <p><input type="radio" value="Shoes" th:field="*{type}" />Shoes</p>
+    <p><input type="radio" value="Clothes" th:field="*{type}" />Clothes</p>
+    <p><input type="radio" value="Hats" th:field="*{type}" />Hats</p>
+    <p><input type="radio" value="Accessories" th:field="*{type}" />Accessories</p>
+</form>
+<div th:if="${products==null || products.isEmpty()}"><strong>Didn't find anything</strong></div>
+</p>
+<tr th:each="product: ${products}">
+   <strong>ID: </strong><td th:text="${product.id}"></td><br>
+    <strong>Name: </strong><td th:text="${product.name}"></td><br>
+    <strong>Type: </strong><td th:text="${product.type}"></td><br>
+    <strong>Price: </strong><td th:text="${product.price}"></td><br>
+    <a th:href="@{/addProduct/{name}(name=${product.name})}">Add product</a><br><br>
+</tr>
+</body>
+</html>

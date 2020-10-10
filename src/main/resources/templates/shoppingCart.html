@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+</head>
+<body>
+<p>
+<a href="/home">Back</a>
+</p>
+<div th:if="${session.list==null || session.list.isEmpty()}"><strong>My Cart is empty</strong></div>
+<tr th:each="product: ${session.list}">
+    <strong>ID: </strong><td th:text="${product.id}"></td><br>
+    <strong>Name: </strong><td th:text="${product.name}"></td><br>
+    <strong>Type: </strong><td th:text="${product.type}"></td><br>
+    <strong>Price: </strong><td th:text="${product.price}"></td><br>
+    <a th:href="@{/deleteProduct/{name}(name=${product.name})}">Delete product</a><br><br>
+</tr>
+
+
+</body>
+</html>
